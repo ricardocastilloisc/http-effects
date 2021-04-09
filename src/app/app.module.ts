@@ -7,6 +7,10 @@ import { SharedModule } from './shared/shared.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import {HttpClientModule} from '@angular/common/http'
 
+
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+
 @NgModule({
   declarations: [
     AppComponent
