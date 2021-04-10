@@ -15,17 +15,37 @@ import { cargarUsuarios } from '../../store/actions/usuarios.actions';
 export class ListaComponent implements OnInit {
 
 
-  UsuariosObs$: Observable<Usuario[]>
+
+  usuarios: Usuario[];
+
+  loading: boolean = false;
+
+  error: any;
+
+
+
+  UsuariosObs$: Observable<Usuario[]>;
 
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.UsuariosObs$ = this.store.select('usuarios').pipe( map(  ({users}) =>  users    ))
+
+
+    this.store
+      .select('usuarios')
+      .subscribe(
+        ({users, error, loading}) => {
+          this.usuarios = users
+          this.error = error
+          this.loading = loading
+        }
+      );
+
     this.store.dispatch(cargarUsuarios());
     /*
     this.UsuariosObs$ = this.usuarioService
       .getUsers()
       .pipe(map(({ data }: any) => data))
   */
- }
+  }
 }
